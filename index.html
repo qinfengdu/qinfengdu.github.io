@@ -1,467 +1,425 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>家庭阅读冒险岛</title>
-    <style>
-        :root {
-            --primary: #4a6fa5;
-            --secondary: #ff9e4f;
-            --light: #f0f7ff;
-            --success: #6bbf59;
-        }
-                body {
-            font-family: 'Comic Sans MS', 'Microsoft YaHei', sans-serif;
-            background-color: var(--light);
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        h1 {
-            margin: 10px 0;
-                        font-size: 24px;
-        }
-        .family-container {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-        .member-card {
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            min-width: 150px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .member-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--secondary);
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px; /* 增大Emoji大小 */
-        }
-                .progress-container {
-            margin: 10px 0;
-        }
-        .progress-bar {
-            height: 15px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background-color: var(--success);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        .checkin-form {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-                    }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-        .checkin-options {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .checkin-option {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .checkin-option.selected {
-            background: var(--secondary);
-            color: white;
-        }
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-                        padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #3a5a8f;
-        }
-        .reset-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #f44336;
-            width: auto;
-            padding: 8px 12px;
-            font-size: 14px;
-        }
-        .reset-btn:hover {
-                  background-color: #d32f2f;
-        }
-        .family-goal {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .tree-container {
-            margin: 20px 0;
-        }
-        .tree {
-            font-size: 80px;
-            display: inline-block;
-            transition: all 0.5s;
-            transform-origin: bottom;
-        }
-        .tree-small { transform: scale(0.6); opacity: 0.8; }
-        .tree-medium { transform: scale(1); }
-        .tree-large { transform: scale(1.3); }
-        .hidden {
-            display: none;
-        }
-        .member-points {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 5px 0;
-        }
-            </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cheese Learner · 老鼠吃奶酪 · 快乐学英语</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b1020">
+<style>
+:root{
+  --bg1:#0b1020; --bg2:#0f1b2d; --card:rgba(255,255,255,.06); --border:rgba(255,255,255,.12);
+  --txt:#fff; --sub:rgba(255,255,255,.75); --accent1:#f6bf3a; --accent2:#f5c84b; --green:#9be2ad; --green2:#c7f9cc;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--txt); font-family:system-ui,-apple-system,Segoe UI,Roboto,PingFang SC,Helvetica,Arial;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px}
+h1{margin:0;font-size:28px;background:linear-gradient(90deg,#ffe9a9,#ffc779);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#fdecc3;color:#6f4a00;font-size:12px;font-weight:600}
+nav.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:rgba(255,255,255,.05);padding:8px;border-radius:18px;border:1px solid var(--border);backdrop-filter:blur(6px)}
+nav.tabs button{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:12px;border:1px solid transparent;background:transparent;color:var(--txt);cursor:pointer}
+nav.tabs button.active{background:linear-gradient(135deg,rgba(246,191,58,.22),rgba(246,191,58,.08));border-color:rgba(246,191,58,.35)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:16px}
+.grid{display:grid;gap:16px}
+.grid.two{grid-template-columns:1.2fr .8fr}
+@media (max-width: 900px){ .grid.two{grid-template-columns:1fr} }
+.btn{padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:#fff;cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.1)}
+.btn-accent{background:rgba(246,191,58,.2);border-color:rgba(246,191,58,.35)}
+.row{display:flex;align-items:center;gap:10px}
+.center{display:grid;place-items:center}
+.small{font-size:12px;color:var(--sub)}
+.badge{font-size:12px;background:rgba(255,255,255,.08);border:1px solid var(--border);padding:6px 10px;border-radius:12px}
+.flashcard{height:220px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.06);display:grid;place-items:center;cursor:pointer}
+.flashcard .front{font-size:40px;font-weight:800;letter-spacing:.02em}
+.flashcard .back{font-size:22px;font-weight:700}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#111;color:#fff;padding:1px 6px;border-radius:6px;border:1px solid #333}
+.stat{min-width:120px}
+.stat .v{font-size:24px;font-weight:800}
+.heat{display:grid;grid-template-columns:repeat(14,1fr);gap:4px}
+.heat .cell{width:18px;height:18px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.06)}
+.heat .label{font-size:10px;color:var(--sub);text-align:center}
+canvas{border-radius:14px;border:1px solid var(--border);background:#0c1426}
+footer{padding:32px 0;text-align:center;color:rgba(255,255,255,.6);font-size:12px}
+.tip{color:var(--sub);font-size:13px}
+hr.dim{border:0;height:1px;background:var(--border);margin:12px 0}
+section.tab{display:none;animation:fade .2s ease}
+section.tab.active{display:block}
+@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-    <header>
-        <h1>家庭阅读冒险岛</h1>
-        <p>一起阅读，一起成长！</p>
-    </header>
-
-    <div class="family-container" id="family-members">
-        <!-- 家庭成员卡片会动态添加 -->
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Cheese Learner</h1>
+      <div class="small">老鼠吃奶酪 · 快乐学英语 · 为中文使用者打造</div>
     </div>
-
-    <div class="checkin-form">
-        <h2>今日打卡</h2>
-        <button class="reset-btn" onclick="resetToday()">重置当日记录</button>
-        
-        <div class="form-group">
-            <label for="member-select">选择家庭成员</label>
-            <select id="member-select">
-                <option value="">-- 请选择 --</option>
-                <!-- 成员选项会动态添加 -->
-            </select>
-        </div>
-        
-        <div class="checkin-options">
-            <div class="checkin-option selected" data-type="reading" onclick="selectCheckinType(this, 'reading')">📖 阅读打卡</div>
-            <div class="checkin-option" data-type="book" onclick="selectCheckinType(this, 'book')">📚 读完一本书</div>
-        </div>
-        
-        <div id="reading-form" class="checkin-type-form">
-                    <div class="form-group">
-                <label for="book-title">书名</label>
-                <input type="text" id="book-title" placeholder="请输入书名">
-            </div>
-            <div class="form-group">
-                <label for="reading-time">阅读时长 (分钟)</label>
-                <input type="number" id="reading-time" placeholder="请输入分钟数">
-            </div>
-        </div>
-        
-        <div id="book-form" class="checkin-type-form hidden">
-            <div class="form-group">
-                <label for="finished-book">书名</label>
-                <input type="text" id="finished-book" placeholder="请输入书名">
-            </div>
-            <div class="form-group">
-                <label for="book-pages">总页数</label>
-                <input type="number" id="book-pages" placeholder="请输入总页数">
-            </div>
-        </div>
-        
-        <button onclick="submitCheckin()">提交打卡</button>
+    <div class="row">
+      <span class="pill">📆 每日打卡</span>
+      <div style="text-align:right">
+        <div class="small">连续学习</div>
+        <div id="streak" style="font-weight:800;font-size:18px">0 天</div>
+      </div>
+      <button class="btn btn-accent" id="install" style="display:none">📲 安装App</button>
     </div>
+  </header>
 
-    <div class="family-goal">
-        <h2>家庭目标</h2>
-        <p>本周全家阅读总时长目标: <strong>7小时</strong></p>
-        <p>已完成: <span id="family-time">0</span>小时</p>
-        <div class="progress-container">
-            <div class="progress-bar">
-                            <div class="progress-fill" id="family-progress"></div>
+  <nav class="tabs" id="tabs"></nav>
+
+  <main style="margin-top:16px">
+    <section id="tab-study" class="tab active">
+      <div class="grid two">
+        <div class="card">
+          <div class="row" style="justify-content:space-between">
+            <button class="btn" id="btn-prev">← 上一张</button>
+            <span class="badge" id="fc-index">第 1 / 1 张</span>
+            <button class="btn" id="btn-next">下一张 →</button>
+          </div>
+          <div class="flashcard" id="flashcard"><div class="front" id="fc-front">apple</div><div class="back" id="fc-back" style="display:none"><div id="fc-trans">苹果</div><div class="small" id="fc-hint" style="margin-top:6px">An apple a day...</div></div></div>
+          <div class="row" style="flex-wrap:wrap;margin-top:10px">
+            <button class="btn btn-accent" id="btn-speak">🔊 发音</button>
+            <button class="btn" id="btn-learn">✅ 标记已掌握</button>
+            <button class="btn" id="btn-add">➕ 添加词汇</button>
+            <span class="small" id="learned-count">已掌握：0 / 0</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">学习贴士</div>
+          <ul class="small">
+            <li>每天学习 10 分钟，胜过偶尔奋战 2 小时。</li>
+            <li>看词 → 听音 → 回忆 → 复述例句，形成闭环。</li>
+            <li>学完来一局“吃奶酪”，在游戏中稳固记忆。</li>
+          </ul>
+          <hr class="dim">
+          <div class="tip">你可以在「闪卡」里添加你伴侣感兴趣的主题词，比如旅行、咖啡、电影台词等。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-quiz" class="tab">
+      <div class="card">
+        <div class="small">选择正确的中文释义：</div>
+        <div id="quiz-prompt" style="font-size:28px;font-weight:800;margin-top:6px">apple</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px" id="quiz-options"></div>
+        <div class="row small" style="margin-top:8px">🏆 正确答题会计入每日进度</div>
+      </div>
+    </section>
+
+    <section id="tab-game" class="tab">
+      <div class="grid two">
+        <div class="card">
+          <div class="row" style="justify-content:space-between;margin-bottom:8px">
+            <span class="pill">使用方向键移动 · 吃到🧀会播报新单词</span>
+            <div class="row">
+              <div class="badge">得分：<span id="score">0</span></div>
+              <button class="btn btn-accent" id="btn-start">▶ 开始</button>
+              <button class="btn" id="btn-pause">⏸ 暂停</button>
+              <button class="btn" id="btn-reset">↺ 重来</button>
             </div>
+          </div>
+          <div class="center"><canvas id="game" width="396" height="396"></canvas></div>
+          <div class="tip" style="margin-top:8px">每次吃到奶酪：自动用英文播报一个新单词，并在画面底部显示中英文。</div>
         </div>
-        
-        <div class="tree-container">
-            <div class="tree tree-small" id="family-tree">🌱</div>
+        <div class="card">
+          <div style="font-weight:700">本局词汇（随机播报）</div>
+          <div id="game-words" class="grid" style="grid-template-columns:repeat(2,1fr);margin-top:8px"></div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <script>
-        // 家庭成员数据
-        let familyMembers = [
-            { id: 1, name: "爸爸", emoji: "👨", color: "#4a6fa5", points: 0, time: 0, books: 0 },
-            { id: 2, name: "妈妈", emoji: "👩", color: "#c76fd6", points: 0, time: 0, books: 0 },
-            { id: 3, name: "孩子", emoji: "🧒", color: "#6bbf59", points: 0, time: 0, books: 0 }
-        ];
-        
-        // 当日打卡记录(用于重置功能)
-        let todayCheckins = [];
-        
-        // 家庭总阅读时间(分钟)
-        let familyTotalTime = 0;
-        
-        // 当前选中的打卡类型
-        let currentCheckinType = 'reading';
-        
-        // 初始化页面
-        function initPage() {
-            renderFamilyMembers();
-            renderCheckinSelect();
-                        updateFamilyProgress();
-        }
-        
-        // 渲染家庭成员卡片
-        function renderFamilyMembers() {
-            const container = document.getElementById('family-members');
-            container.innerHTML = '';
-            
-            familyMembers.forEach(member => {
-                const card = document.createElement('div');
-                card.className = 'member-card';
-                card.innerHTML = `
-                    <div class="member-avatar" style="background-color: ${member.color}">${member.emoji}</div>
-                    <h3>${member.name}</h3>
-                    <div class="member-points">${member.points}分</div>
-                    <p>阅读: ${Math.floor(member.time/60)}h${member.time%60}m</p>
-                    <p>书籍: ${member.books}本</p>
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%; background-color: ${member.color}"></div>
-                         </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-        
-        // 渲染打卡选择下拉框
-        function renderCheckinSelect() {
-            const select = document.getElementById('member-select');
-            select.innerHTML = '<option value="">-- 请选择 --</option>';
-            
-            familyMembers.forEach(member => {
-                const option = document.createElement('option');
-                option.value = member.id;
-                option.textContent = `${member.emoji} ${member.name}`;
-                select.appendChild(option);
-            });
-        }
-        
-        // 选择打卡类型
-                function selectCheckinType(element, type) {
-            // 更新选中状态
-            document.querySelectorAll('.checkin-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            
-            // 隐藏所有表单
-            document.querySelectorAll('.checkin-type-form').forEach(form => {
-                form.classList.add('hidden');
-                          });
-            
-            // 显示选中的表单
-            document.getElementById(`${type}-form`).classList.remove('hidden');
-            
-            currentCheckinType = type;
-        }
-        
-        // 提交打卡
-        function submitCheckin() {
-            const memberId = parseInt(document.getElementById('member-select').value);
-            if (!memberId) {
-                alert('请选择家庭成员');
-                return;
-            }
-            
-            const member = familyMembers.find(m => m.id === memberId);
-            if (!member) return;
-            
-            let points = 0;
-            let time = 0;
-            let books = 0;  
-                        let description = '';
-            
-            switch (currentCheckinType) {
-                case 'reading':
-                    const readingTime = parseInt(document.getElementById('reading-time').value) || 0;
-                    const bookTitle = document.getElementById('book-title').value.trim();
-                    
-                    if (!bookTitle) {
-                        alert('请输入书名');
-                        return;
-                    }
-                    
-                    if (readingTime <= 0) {
-                        alert('请输入有效的阅读时间');
-                        return;
-                    }
-                    
-                    points = Math.floor(readingTime / 10);
-                    time = readingTime;
-                    description = `阅读《${bookTitle}》${readingTime}分钟`;
-                    break;
-                    
-                case 'book':
-                    const finishedBook = document.getElementById('finished-book').value.trim();    
-                                        const bookPages = parseInt(document.getElementById('book-pages').value) || 0;
-                    
-                    if (!finishedBook) {
-                        alert('请输入书名');
-                        return;
-                    }
-                    
-                    if (bookPages <= 0) {
-                        alert('请输入有效的页数');
-                        return;
-                    }
-                    
-                    points = Math.floor(bookPages / 5);
-                    books = 1;
-                    description = `读完《${finishedBook}》，${bookPages}页`;
-                    break;
-                          }
-            
-            // 保存当日打卡记录(用于重置)
-            todayCheckins.push({
-                memberId,
-                points,
-                time,
-                books
-            });
-            
-            // 更新成员数据
-            member.points += points;
-            member.time += time;
-            member.books += books;
-            
-            // 更新家庭总时间
-            familyTotalTime += time;
-            
-            // 更新UI
-            renderFamilyMembers();
-            updateFamilyProgress();
-            
-            // 重置表单
-            document.getElementById('member-select').value = '';
-            document.querySelectorAll('input').forEach(input => {
-                if (input.type !== 'button' && input.type !== 'submit') {  
-                          input.value = '';
-                }
-            });
-            
-            alert(`${member.emoji} ${member.name} 打卡成功！获得 ${points} 积分！`);
-        }
-        
-        // 重置当日记录
-        function resetToday() {
-            if (todayCheckins.length === 0) {
-                alert('今日还没有打卡记录');
-                return;
-            }
-            
-            if (!confirm('确定要重置今日所有打卡记录吗？')) {
-                return;
-            }
-            
-            // 回滚当日所有打卡记录
-            todayCheckins.forEach(checkin => {
-                const member = familyMembers.find(m => m.id === checkin.memberId);
-                if (member) {
-                    member.points -= checkin.points;
-                    member.time -= checkin.time;
-                    member.books -= checkin.books;      
-                              familyTotalTime -= checkin.time;
-                }
-            });
-            
-            // 清空当日记录
-            todayCheckins = [];
-            
-            // 更新UI
-            renderFamilyMembers();
-            updateFamilyProgress();
-            
-            alert('今日打卡记录已重置');
-        }
-        
-        // 更新家庭进度
-        function updateFamilyProgress() {
-            const hours = Math.floor(familyTotalTime / 60);    
-                        const minutes = familyTotalTime % 60;
-            
-            document.getElementById('family-time').textContent = `${hours}小时${minutes}分钟`;
-            
-            const progress = Math.min(100, (familyTotalTime / (7 * 60)) * 100);
-            document.getElementById('family-progress').style.width = `${progress}%`;
-            
-            // 更新家庭阅读树
-            const tree = document.getElementById('family-tree');
-            if (progress >= 100) {
-                tree.className = 'tree tree-large';
-                tree.textContent = '🌳';
-            } else if (progress >= 50) {
-                tree.className = 'tree tree-medium';
-                tree.textContent = '🌲';
-            } else {  
-                  tree.className = 'tree tree-small';
-                tree.textContent = '🌱';
-            }
-        }
-        
-        // 初始化页面
-        window.onload = initPage;
-    </script>
+    <section id="tab-progress" class="tab">
+      <div class="grid two">
+        <div class="card">
+          <div style="font-weight:700">今日进度</div>
+          <div class="row" style="gap:24px;margin-top:8px;flex-wrap:wrap">
+            <div class="card stat">
+              <div class="small">闪卡学习</div>
+              <div class="v" id="st-ws">0 次</div>
+            </div>
+            <div class="card stat">
+              <div class="small">测验答对</div>
+              <div class="v" id="st-qc">0 题</div>
+            </div>
+            <div class="card stat">
+              <div class="small">吃奶酪次数</div>
+              <div class="v" id="st-ce">0 次</div>
+            </div>
+          </div>
+          <div style="font-weight:700;margin-top:12px">连续 14 天活动</div>
+          <div class="heat" id="heat"></div>
+          <div class="row" id="heat-labels" style="justify-content:space-between;margin-top:4px"></div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">词库与个性化</div>
+          <div class="tip" id="dict-info" style="margin-top:6px">当前词条：0 个。建议把常用场景加入词库，提高记忆效率。</div>
+          <hr class="dim">
+          <div class="small">设置提示：</div>
+          <ul class="small">
+            <li>在“闪卡学习”中可手动添加词汇；</li>
+            <li>浏览器需允许语音合成功能以播放发音；</li>
+            <li>所有进度均保存在本地浏览器（不联网）。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Cheese Learner · 与伴侣一起进步 ❤</footer>
+</div>
+
+<script>
+// PWA: register SW & install button
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js");
+  });
+}
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById("install");
+  btn.style.display = "inline-flex";
+  btn.onclick = async () => {
+    btn.disabled = true;
+    try {
+      await deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+    } finally {
+      deferredPrompt = null;
+      btn.style.display = "none";
+    }
+  };
+});
+
+// ===== 数据与工具（与非PWA版一致） =====
+const DEFAULT_WORDS=[
+  { word: "apple", trans:"苹果", hint:"An apple a day..." },
+  { word: "cheese", trans:"奶酪", hint:"Mice love cheese" },
+  { word: "mouse", trans:"老鼠", hint:"A small animal" },
+  { word: "happy", trans:"开心的", hint:"I feel happy today" },
+  { word: "run", trans:"跑", hint:"Run fast!" },
+  { word: "blue", trans:"蓝色", hint:"The sky is blue" },
+  { word: "water", trans:"水", hint:"Drink water" },
+  { word: "friend", trans:"朋友", hint:"A good friend" },
+  { word: "learn", trans:"学习", hint:"Learn English" },
+  { word: "dream", trans:"梦想", hint:"Follow your dream" }
+];
+function todayKey(){ return new Date().toISOString().slice(0,10); }
+const LS={
+  get(k,d){ try{const v=localStorage.getItem(k); return v?JSON.parse(v):d;}catch{return d} },
+  set(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
+};
+function loadProgress(){ return LS.get("cheeseLearner.progress",{}); }
+function saveProgress(x){ LS.set("cheeseLearner.progress",x); }
+function bump(field,inc=1){
+  const data=loadProgress(); const d=todayKey();
+  data[d] ||= {wordsStudied:0,quizCorrect:0,cheeseEaten:0};
+  data[d][field]=(data[d][field]||0)+inc;
+  data.__streak = calcStreak(data);
+  saveProgress(data); syncHeader();
+}
+function calcStreak(data){
+  const keys=Object.keys(data).filter(k=>/^\\d{4}-\\d{2}-\\d{2}$/.test(k)).sort();
+  const set=new Set(keys); let n=0; const base=new Date();
+  for(let i=0;;i++){ const d=new Date(base); d.setDate(base.getDate()-i); const k=d.toISOString().slice(0,10);
+    if(!set.has(k)) break; const day=data[k]; const sum=(day.wordsStudied||0)+(day.quizCorrect||0)+(day.cheeseEaten||0);
+    if(sum>0) n++; else break;
+  } return n;
+}
+function speak(text){
+  try{
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="en-US"; u.rate=0.95; u.pitch=1.0;
+    window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+  }catch{}
+}
+
+let WORDS = LS.get("cheeseLearner.words", DEFAULT_WORDS);
+let LEARNED = LS.get("cheeseLearner.learned", {});
+function saveWords(){ LS.set("cheeseLearner.words", WORDS); }
+function saveLearned(){ LS.set("cheeseLearner.learned", LEARNED); }
+
+const TAB_LIST=[
+  {key:"study",label:"闪卡学习",icon:"📘"}, {key:"quiz",label:"测验",icon:"🏆"},
+  {key:"game",label:"吃奶酪游戏",icon:"🐭🧀"}, {key:"progress",label:"进度",icon:"📅"}
+];
+let currentTab="study";
+const tabsEl=document.getElementById("tabs");
+TAB_LIST.forEach(t=>{
+  const b=document.createElement("button"); b.innerHTML=`<span style="font-size:14px">${t.icon}</span> ${t.label}`;
+  b.onclick=()=>switchTab(t.key); b.id="tabbtn-"+t.key; tabsEl.appendChild(b);
+});
+function switchTab(key){
+  document.querySelectorAll("section.tab").forEach(s=>s.classList.remove("active"));
+  document.getElementById("tab-"+key).classList.add("active");
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.remove("active"));
+  document.getElementById("tabbtn-"+key).classList.add("active");
+  currentTab=key;
+  if(key==="quiz") renderQuiz();
+  if(key==="progress") renderProgress();
+}
+switchTab("study");
+
+function syncHeader(){
+  const p=loadProgress();
+  document.getElementById("streak").textContent=(p.__streak||0)+" 天";
+}
+syncHeader();
+
+let fcIndex=0, fcShowBack=false;
+const fcFront=document.getElementById("fc-front");
+const fcBack=document.getElementById("fc-back");
+const fcTrans=document.getElementById("fc-trans");
+const fcHint=document.getElementById("fc-hint");
+const fcIndexEl=document.getElementById("fc-index");
+const learnedCount=document.getElementById("learned-count");
+function renderFlashcard(){
+  if(!WORDS.length){ fcFront.textContent="(暂无词汇)"; fcBack.style.display="none"; fcIndexEl.textContent="第 0 / 0 张"; learnedCount.textContent="已掌握：0 / 0"; return; }
+  const w=WORDS[(fcIndex%WORDS.length+WORDS.length)%WORDS.length];
+  fcFront.textContent=w.word; fcTrans.textContent=w.trans; fcHint.textContent=w.hint||"";
+  fcFront.style.display=fcShowBack?"none":""; fcBack.style.display=fcShowBack?"":"none";
+  fcIndexEl.textContent=`第 ${((fcIndex%WORDS.length+WORDS.length)%WORDS.length)+1} / ${WORDS.length} 张`;
+  const learnedN=Object.keys(LEARNED).filter(k=>LEARNED[k]).length;
+  learnedCount.textContent=`已掌握：${learnedN} / ${WORDS.length}`;
+}
+document.getElementById("flashcard").onclick=()=>{ fcShowBack=!fcShowBack; renderFlashcard(); };
+document.getElementById("btn-prev").onclick=()=>{ fcShowBack=false; fcIndex--; renderFlashcard(); };
+document.getElementById("btn-next").onclick=()=>{ fcShowBack=false; fcIndex++; renderFlashcard(); };
+document.getElementById("btn-speak").onclick=()=>{ const w=WORDS[(fcIndex%WORDS.length+WORDS.length)%WORDS.length]; speak(w.word); };
+document.getElementById("btn-learn").onclick=()=>{
+  const w=WORDS[(fcIndex%WORDS.length+WORDS.length)%WORDS.length]; LEARNED[w.word]=true; saveLearned(); bump("wordsStudied",1); renderFlashcard();
+};
+document.getElementById("btn-add").onclick=()=>{
+  const word=prompt("输入英文单词："); if(!word) return;
+  const trans=prompt("输入中文释义：")||""; const hint=prompt("输入例句/提示(可选)：")||"";
+  WORDS=[...WORDS,{word,trans,hint}]; saveWords(); renderFlashcard(); syncDictInfo(); renderQuiz(); renderGameWordList();
+};
+renderFlashcard();
+
+let QUIZ=null;
+function makeQuestion(pool){
+  if(pool.length<4) return null;
+  const shuffled=[...pool].sort(()=>Math.random()-.5);
+  const options=shuffled.slice(0,4);
+  const answer=options[Math.floor(Math.random()*4)];
+  return {prompt:answer.word, answer, options};
+}
+function renderQuiz(){
+  const promptEl=document.getElementById("quiz-prompt");
+  const optEl=document.getElementById("quiz-options"); optEl.innerHTML="";
+  QUIZ=makeQuestion(WORDS);
+  if(!QUIZ){ promptEl.textContent="词库至少需要 4 个词才能开始测验。"; return; }
+  promptEl.textContent=QUIZ.prompt;
+  QUIZ.options.forEach(opt=>{
+    const b=document.createElement("button");
+    b.className="btn"; b.style.textAlign="left"; b.innerHTML=`<div style="font-weight:600">${opt.trans}</div><div class="small">${opt.hint||""}</div>`;
+    b.onclick=()=>{
+      const ok=opt.word===QUIZ.answer.word;
+      if(ok){ b.style.borderColor="#7ee787"; b.style.background="rgba(126,231,135,.2)"; bump("quizCorrect",1); }
+      setTimeout(()=>renderQuiz(),600);
+    };
+    optEl.appendChild(b);
+  });
+}
+renderQuiz();
+
+const size=18, cell=22;
+const canvas=document.getElementById("game"); const ctx=canvas.getContext("2d");
+let running=false, step=0, dir={x:1,y:0}, snake=[{x:4,y:8}], cheese=spawnCheese(), overlay=null, score=0;
+function spawnCheese(){ return {x:Math.floor(Math.random()*size), y:Math.floor(Math.random()*size)}; }
+function pickWord(){ return WORDS[Math.floor(Math.random()*WORDS.length)] || {word:"cheese",trans:"奶酪"}; }
+let currentWord=pickWord();
+
+function resetGame(){ snake=[{x:4,y:8}]; dir={x:1,y:0}; cheese=spawnCheese(); currentWord=pickWord(); score=0; overlay=null; running=false; document.getElementById("score").textContent=score; }
+
+function move(){
+  const s=[...snake];
+  const head={ x:(s[0].x+dir.x+size)%size, y:(s[0].y+dir.y+size)%size };
+  if(s.some(p=>p.x===head.x && p.y===head.y)){ running=false; overlay={word:"游戏结束", trans:`得分 ${score}`}; return; }
+  s.unshift(head);
+  if(head.x===cheese.x && head.y===cheese.y){
+    score++; document.getElementById("score").textContent=score;
+    currentWord=pickWord(); speak(currentWord.word); overlay={word:currentWord.word, trans:currentWord.trans};
+    bump("cheeseEaten",1); cheese=spawnCheese();
+  }else{ s.pop(); }
+  snake=s;
+}
+function draw(){
+  const W=size*cell,H=size*cell;
+  ctx.clearRect(0,0,W,H);
+  for(let y=0;y<size;y++) for(let x=0;x<size;x++){
+    ctx.fillStyle=((x+y)%2===0)?"rgba(255,255,255,.05)":"rgba(255,255,255,.03)";
+    ctx.fillRect(x*cell,y*cell,cell,cell);
+  }
+  ctx.fillStyle="#f5c84b"; ctx.fillRect(cheese.x*cell+3,cheese.y*cell+3,cell-6,cell-6);
+  ctx.fillStyle="#e7b62a"; ctx.beginPath(); ctx.arc(cheese.x*cell+cell*.45,cheese.y*cell+cell*.45,3,0,Math.PI*2); ctx.fill();
+  snake.forEach((p,i)=>{ ctx.fillStyle=i===0? "#c7f9cc":"#9be2ad"; ctx.fillRect(p.x*cell+2,p.y*cell+2,cell-4,cell-4); });
+  if(overlay && overlay.word!=="游戏结束"){
+    ctx.globalAlpha=.9; ctx.fillStyle="rgba(0,0,0,.6)"; ctx.fillRect(0,H-40,W,40);
+    ctx.globalAlpha=1; ctx.fillStyle="#fff"; ctx.font="bold 16px system-ui"; ctx.fillText(`新单词：${overlay.word} · ${overlay.trans}`,10,H-14);
+  }
+}
+function loop(){
+  if(running){ step++; if(step%6===0) move(); }
+  draw(); requestAnimationFrame(loop);
+}
+loop();
+
+window.addEventListener("keydown",e=>{
+  const k=e.key; const d=dir;
+  if(k==="ArrowUp" && d.y!==1) dir={x:0,y:-1};
+  if(k==="ArrowDown" && d.y!==-1) dir={x:0,y:1};
+  if(k==="ArrowLeft" && d.x!==1) dir={x:-1,y:0};
+  if(k==="ArrowRight" && d.x!==-1) dir={x:1,y:0};
+});
+document.getElementById("btn-start").onclick=()=>{ running=true; };
+document.getElementById("btn-pause").onclick=()=>{ running=false; };
+document.getElementById("btn-reset").onclick=()=>{ resetGame(); };
+
+function renderGameWordList(){
+  const box=document.getElementById("game-words"); box.innerHTML="";
+  WORDS.slice(0,10).forEach(w=>{
+    const div=document.createElement("div");
+    div.className="card"; div.style.padding="10px";
+    div.innerHTML=`<div class="row" style="justify-content:space-between"><span style="font-weight:600">${w.word}</span><button class="btn" data-w="${w.word}" style="padding:6px 8px">🔊</button></div>`;
+    box.appendChild(div);
+  });
+  box.querySelectorAll("button[data-w]").forEach(b=> b.onclick=()=>speak(b.getAttribute("data-w")));
+}
+renderGameWordList();
+
+function renderProgress(){
+  const p=loadProgress(); const d=todayKey(); const today=p[d] || {wordsStudied:0,quizCorrect:0,cheeseEaten:0};
+  document.getElementById("st-ws").textContent=today.wordsStudied+" 次";
+  document.getElementById("st-qc").textContent=today.quizCorrect+" 题";
+  document.getElementById("st-ce").textContent=today.cheeseEaten+" 次";
+  const days=[];
+  for(let i=13;i>=0;i--){ const dt=new Date(); dt.setDate(dt.getDate()-i); const key=dt.toISOString().slice(0,10);
+    const v=((p[key]?.wordsStudied||0)+(p[key]?.quizCorrect||0)+(p[key]?.cheeseEaten||0));
+    days.push({key,label:key.slice(5),v});
+  }
+  const heat=document.getElementById("heat"); heat.innerHTML="";
+  days.forEach(t=>{
+    const c=document.createElement("div"); c.className="cell"; c.style.background=`rgba(246,191,58, ${Math.min(1,t.v/5)*.8})`; heat.appendChild(c);
+  });
+  const labels=document.getElementById("heat-labels"); labels.innerHTML="";
+  labels.appendChild(el("div",{class:"label"},days[0].label));
+  labels.appendChild(el("div",{class:"label"},days[days.length-1].label));
+  syncDictInfo();
+}
+function el(tag,attrs,...kids){ const n=document.createElement(tag); for(const k in attrs||{}) if(k==="class") n.className=attrs[k]; else n.setAttribute(k,attrs[k]); kids.forEach(k=>n.appendChild(document.createTextNode(k))); return n; }
+function syncDictInfo(){ document.getElementById("dict-info").textContent=`当前词条：${WORDS.length} 个。建议把你伴侣常用、感兴趣的主题加入词库，提高记忆效率。`; }
+
+document.getElementById("year").textContent=new Date().getFullYear();
+document.getElementById("tabbtn-study").classList.add("active");
+syncDictInfo();
+</script>
 </body>
 </html>
